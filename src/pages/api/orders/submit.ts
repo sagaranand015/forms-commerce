@@ -1,3 +1,4 @@
+import { encodeURL, TransactionRequestURLFields } from "@solana/pay";
 import { NextApiResponse } from "next/types";
 import { NextApiRequest } from "next/types";
 import { PAYMENT_URI, SERVER_NAME } from "src/utils/constants";
@@ -11,11 +12,17 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
             const user_name = inputs["name"];
             const payment_value = inputs["value"];
             console.log("Got a submission: ", submission_id, user_email, user_name, payment_value);
-            var encodedUri = encodeURI(`submission_id=${submission_id}&name=${user_name}&email=${user_email}&value=${payment_value}`);
-            var paylink = `solana:${SERVER_NAME}/${PAYMENT_URI}?${encodedUri}`;
+
+            var uri = `submission_id=${submission_id}&name=${user_name}&email=${user_email}&value=${payment_value}`;
+            var paylink = `https://${SERVER_NAME}/api/${PAYMENT_URI}`;
+
+            const mintUrlFields: TransactionRequestURLFields = {
+                link: new URL(paylink),
+            }
+            const mintUrl = encodeURL(mintUrlFields)
             const resp = {
                 "status": "OK",
-                "payment_link": paylink
+                "payment_link": mintUrl
             }
             return res.status(200).json(resp);
         }

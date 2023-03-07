@@ -1,2 +1,2 @@
-export const SERVER_NAME = "https://forms-commerce.vercel.app/api"
+export const SERVER_NAME = "forms-commerce.vercel.app"
 export const PAYMENT_URI = "payment/confirm";

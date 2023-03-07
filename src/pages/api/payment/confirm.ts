@@ -69,27 +69,28 @@ const get = async (request: NextApiRequest, response: NextApiResponse) => {
 
 const post = async (request: NextApiRequest, response: NextApiResponse) => {
     // Account provided in the transaction request body by the wallet.
-    const accountField = request.body?.account;
-    if (!accountField) throw new Error('missing account');
+    // const accountField = request.body?.account;
+    // if (!accountField) throw new Error('missing account');
 
-    const sender = new PublicKey(accountField);
+    // const sender = new PublicKey(accountField);
 
-    // create spl transfer instruction
-    // const splTransferIx = await createSplTransferIx(sender, connection);
+    // // create spl transfer instruction
+    // // const splTransferIx = await createSplTransferIx(sender, connection);
 
-    // create the transaction
-    const transaction = new Transaction();
+    // // create the transaction
+    // const transaction = new Transaction();
 
-    // add the instruction to the transaction
-    // transaction.add(splTransferIx);
+    // // add the instruction to the transaction
+    // // transaction.add(splTransferIx);
 
-    // Serialize and return the unsigned transaction.
-    const serializedTransaction = transaction.serialize({
-        verifySignatures: false,
-        requireAllSignatures: false,
-    });
+    // // Serialize and return the unsigned transaction.
+    // const serializedTransaction = transaction.serialize({
+    //     verifySignatures: false,
+    //     requireAllSignatures: false,
+    // });
 
-    const base64Transaction = serializedTransaction.toString('base64');
+    // const base64Transaction = serializedTransaction.toString('base64');
+    const base64Transaction = "M1dReVp5c3o3Z3V6aDRua2JxUUFieU5OVm9XRnpXdGtzOVdVWTlTRjRWb1JYQzY3UVpIc3NQNWpUaFpwUFUzYlBTUFl0MlVRczNpNFJrdmNhcGhuM2NXYw=="
     const message = 'Thank you for your purchase of ExiledApe #518';
 
     response.status(200).send({ transaction: base64Transaction, message });

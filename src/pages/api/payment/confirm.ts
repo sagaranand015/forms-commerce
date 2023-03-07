@@ -102,7 +102,7 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
             return get(req, res);
         case 'POST':
             try {
-
+                return post(req, res);
             } catch (err) {
                 return res.status(400).send({
                     "status": "BAD_REQUEST"

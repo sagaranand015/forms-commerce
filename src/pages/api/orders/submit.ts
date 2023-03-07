@@ -14,15 +14,18 @@ const handler = (req: NextApiRequest, res: NextApiResponse) => {
             console.log("Got a submission: ", submission_id, user_email, user_name, payment_value);
 
             var uri = `submission_id=${submission_id}&name=${user_name}&email=${user_email}&value=${payment_value}`;
-            var paylink = `https://${SERVER_NAME}/api/${PAYMENT_URI}`;
+            var paylink = `solana:https://${SERVER_NAME}/api/${PAYMENT_URI}?${uri}`;
 
             const mintUrlFields: TransactionRequestURLFields = {
-                link: new URL(paylink),
+                'link': new URL(paylink),
             }
             const mintUrl = encodeURL(mintUrlFields)
+
+            console.log("====== mintUrl is: ", mintUrl)
+
             const resp = {
                 "status": "OK",
-                "payment_link": mintUrl
+                "payment_link": paylink
             }
             return res.status(200).json(resp);
         }
